@@ -1,10 +1,13 @@
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import TaskList from '../task-list';
 import NewTaskForm from '../new-task-form';
 import Footer from '../footer';
 
 import './app.css';
+
+const UNIQUE_ID = uuidv4();
 
 function App() {
   const todoData = [
