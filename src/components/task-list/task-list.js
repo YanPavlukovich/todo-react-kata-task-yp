@@ -1,19 +1,41 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import Task from '../task';
 
 import './task-list.css';
 
-const TaskList = ({ todos, onDeleted }) => {
-  const elements = todos.map((item) => {
-    const { id, ...itemProps } = item;
-    return (
-      <li key={id} className="list-group-item">
-        <Task {...itemProps} onDeleted={() => onDeleted(id)} />
-      </li>
-    );
-  });
-  return <ul className="list-group todo-list">{elements}</ul>;
-};
+export default class TaskList extends Component {
+  static defaultProperties = {
+    tasks: [],
+    onComplete: () => {},
+    onDeleted: () => {},
+    onEditStart: () => {},
+    onEditEnd: () => {},
+  };
 
-export default TaskList;
+  static propTypes = {
+    tasks: PropTypes.array,
+    onComplete: PropTypes.func,
+    onDeleted: PropTypes.func,
+    onEditStart: PropTypes.func,
+    onEditEnd: PropTypes.func,
+  };
+
+  render() {
+    const { tasks, onComplete, onDeleted, onEditStart, onEditEnd } = this.props;
+
+    const taskElems = tasks.map((task) => (
+      <Task
+        {...task}
+        key={task.id}
+        onComplete={() => onComplete(task.id)}
+        onDeleted={() => onDeleted(task.id)}
+        onEditStart={() => onEditStart(task.id)}
+        onEditEnd={(...args) => onEditEnd(...args)}
+      />
+    ));
+
+    return <ul className="todo-list">{taskElems}</ul>;
+  }
+}
