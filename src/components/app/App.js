@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import TaskList from '../task-list';
@@ -34,7 +34,7 @@ export default class App extends Component {
     const newItem = {
       label: text,
       completed: false,
-      id: TODO_ID,
+      id: UNIQUE_ID,
     };
 
     this.setState(({ todoData }) => {
@@ -54,7 +54,7 @@ export default class App extends Component {
           <NewTaskForm />
         </header>
         <section className="main">
-          <TaskList todos={this.state.todoData} />
+          <TaskList todos={this.state.todoData} onDeleted={this.deleteItem} />
         </section>
         <Footer />
       </section>
