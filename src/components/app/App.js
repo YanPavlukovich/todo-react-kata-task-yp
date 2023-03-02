@@ -7,8 +7,6 @@ import Footer from '../footer';
 
 import './app.css';
 
-const UNIQUE_ID = uuidv4();
-
 export default class App extends Component {
   state = {
     tasks: [],
@@ -25,7 +23,7 @@ export default class App extends Component {
     createTime: new Date(),
     completed: false,
     editing: false,
-    id: UNIQUE_ID,
+    id: uuidv4(),
   });
 
   toggleProperty = (array, id, property) => {

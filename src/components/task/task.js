@@ -19,7 +19,7 @@ export default class Task extends Component {
   static propTypes = {
     completed: PropTypes.bool,
     editing: PropTypes.bool,
-    id: PropTypes.number,
+    id: PropTypes.string,
     description: PropTypes.string,
     createTime: PropTypes.instanceOf(Date),
     onComplete: PropTypes.func,
