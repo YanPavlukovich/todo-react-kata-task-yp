@@ -9,24 +9,55 @@ import './app.css';
 
 const UNIQUE_ID = uuidv4();
 
-function App() {
-  const todoData = [
-    { id: 1, label: 'Completed task' },
-    { id: 2, label: 'Editing task' },
-    { id: 3, label: 'Active task' },
-  ];
-  return (
-    <section className="todoapp">
-      <header className="header">
-        <h1>todos</h1>
-        <NewTaskForm />
-      </header>
-      <section className="main">
-        <TaskList todos={todoData} />
-      </section>
-      <Footer />
-    </section>
-  );
-}
+export default class App extends Component {
+  state = {
+    todoData: [
+      { id: 1, label: 'Completed task', completed: false },
+      { id: 2, label: 'Editing task', completed: false },
+      { id: 3, label: 'Active task', completed: false },
+    ],
+  };
 
-export default App;
+  deleteItem = (id) => {
+    this.setState(({ todoData }) => {
+      const idx = todoData.findIndex((item) => item.id === id);
+
+      const newTodoData = [...todoData.slice(0, idx), ...todoData.slice(idx + 1)];
+
+      return {
+        todoData: newTodoData,
+      };
+    });
+  };
+
+  addItem = (text) => {
+    const newItem = {
+      label: text,
+      completed: false,
+      id: TODO_ID,
+    };
+
+    this.setState(({ todoData }) => {
+      const newTodoData = [...todoData, newItem];
+
+      return {
+        todoData: newTodoData,
+      };
+    });
+  };
+
+  render() {
+    return (
+      <section className="todoapp">
+        <header className="header">
+          <h1>todos</h1>
+          <NewTaskForm />
+        </header>
+        <section className="main">
+          <TaskList todos={this.state.todoData} />
+        </section>
+        <Footer />
+      </section>
+    );
+  }
+}
