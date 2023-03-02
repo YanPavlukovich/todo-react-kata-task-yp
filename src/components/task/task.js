@@ -22,11 +22,9 @@ export default class Task extends Component {
 
     return (
       <div className={classNames}>
-        <input className="toggle" type="checkbox" />
+        <input className="toggle" type="checkbox" onClick={this.onLabelClick.bind(this)} />
         <label>
-          <span className="description" onClick={this.onLabelClick.bind(this)}>
-            {label}
-          </span>
+          <span className="description">{label}</span>
         </label>
         <button className="icon icon-edit"></button>
         <button className="icon icon-destroy" onClick={onDeleted}></button>

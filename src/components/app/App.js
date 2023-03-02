@@ -51,7 +51,7 @@ export default class App extends Component {
       <section className="todoapp">
         <header className="header">
           <h1>todos</h1>
-          <NewTaskForm />
+          <NewTaskForm onItemAdded={this.addItem} />
         </header>
         <section className="main">
           <TaskList todos={this.state.todoData} onDeleted={this.deleteItem} />

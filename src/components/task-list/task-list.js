@@ -8,7 +8,6 @@ const TaskList = ({ todos, onDeleted }) => {
   const elements = todos.map((item) => {
     const { id, ...itemProps } = item;
     return (
-      // eslint-disable-next-line react/jsx-key
       <li key={id} className="list-group-item">
         <Task {...itemProps} onDeleted={() => onDeleted(id)} />
       </li>
