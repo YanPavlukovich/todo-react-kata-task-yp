@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import PropTypes from 'prop-types';
+import { v4 as uuidv4 } from 'uuid';
 
 import './task.css';
 
 export default class Task extends Component {
-  static defaultProps = {
+  static defaultProperties = {
     completed: false,
     editing: false,
-    id: 100,
+    id: uuidv4(),
     description: '',
     createTime: new Date(),
     onComplete: () => {},
@@ -16,7 +17,7 @@ export default class Task extends Component {
     onDeleted: () => {},
   };
 
-  static propTypes = {
+  static propertiesTypes = {
     completed: PropTypes.bool,
     editing: PropTypes.bool,
     id: PropTypes.string,
@@ -31,14 +32,14 @@ export default class Task extends Component {
     taskLabel: this.props.description,
   };
 
-  onTaskEdit = (e) => {
+  onTaskEdit = (event) => {
     this.setState({
-      taskLabel: e.target.value,
+      taskLabel: event.target.value,
     });
   };
 
-  onSubmitHandler = (e) => {
-    e.preventDefault();
+  onSubmitHandler = (event) => {
+    event.preventDefault();
 
     const { onEditEnd, id } = this.props;
     const { taskLabel } = this.state;

@@ -14,7 +14,7 @@ export default class TaskList extends Component {
     onEditEnd: () => {},
   };
 
-  static propTypes = {
+  static propertiesTypes = {
     tasks: PropTypes.array,
     onComplete: PropTypes.func,
     onDeleted: PropTypes.func,
@@ -25,7 +25,7 @@ export default class TaskList extends Component {
   render() {
     const { tasks, onComplete, onDeleted, onEditStart, onEditEnd } = this.props;
 
-    const taskElems = tasks.map((task) => (
+    const taskElements = tasks.map((task) => (
       <Task
         {...task}
         key={task.id}
@@ -36,6 +36,6 @@ export default class TaskList extends Component {
       />
     ));
 
-    return <ul className="todo-list">{taskElems}</ul>;
+    return <ul className="todo-list">{taskElements}</ul>;
   }
 }

@@ -6,24 +6,24 @@ import TasksFilter from '../tasks-filter';
 import './footer.css';
 
 export default class Footer extends Component {
-  static defaultProps = {
-    todoCount: 0,
+  static defaultProperties = {
+    todoCounter: 0,
     onFilter: () => {},
     onClearActive: () => {},
   };
 
-  static propTypes = {
-    todoCount: PropTypes.number,
+  static propertiesTypes = {
+    todoCounter: PropTypes.number,
     onFilter: PropTypes.func,
     onClearActive: PropTypes.func,
   };
 
   render() {
-    const { todoCount, onFilter, onClearActive, filters } = this.props;
+    const { todoCounter, onFilter, onClearActive, filters } = this.props;
 
     return (
       <footer className="footer">
-        <span className="todo-count">{todoCount} items left</span>
+        <span className="todo-count">{todoCounter} items left</span>
 
         <TasksFilter onFilter={onFilter} filters={filters} />
 
