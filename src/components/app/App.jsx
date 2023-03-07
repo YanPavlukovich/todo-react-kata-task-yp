@@ -64,11 +64,12 @@ export default class App extends Component {
     }));
   };
 
-  editStartTaskHandler = (id) => {
+  editStartTaskHandler = (id, disabledAll) => {
+    console.log(disabledAll);
     this.setState((state) => {
       const tasks = state.tasks.map((task) => ({
         ...task,
-        editing: task.id === id,
+        editing: disabledAll ? false : task.id === id,
       }));
 
       return {
@@ -85,7 +86,6 @@ export default class App extends Component {
         } else {
           return {
             ...task,
-            editing: false,
             description: value,
           };
         }
@@ -120,6 +120,27 @@ export default class App extends Component {
       };
     });
   };
+
+  endOfEditedAllChildren = (e) => {
+    if (!e.target.closest('.icon-edit') && !e.target.closest('.edit')) {
+      this.setState((state) => {
+        return {
+          tasks: state.tasks.map((task) => ({
+            ...task,
+            editing: false,
+          })),
+        };
+      });
+    }
+  };
+
+  componentDidMount() {
+    document.addEventListener('click', this.endOfEditedAllChildren);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('click', this.endOfEditedAllChildren);
+  }
 
   render() {
     const { tasks, filters } = this.state;
